@@ -2,6 +2,7 @@
 
 installVer='12' 	#NodeJS major version to be installed
 minVer='12'	      #min NodeJS major version to be accepted
+armvVer='v12.19.0'	#version to install for armv6 (to check on https://unofficial-builds.nodejs.org)
 
 # vérifier si toujours nécessaire, cette source traine encore sur certaines smart et si une source est invalide -> nodejs ne s'installera pas
 if [ -f /etc/apt/sources.list.d/deb-multimedia.list* ]; then
@@ -94,13 +95,13 @@ else
   
   if [[ $arch == "armv6l" ]]
   then
-    echo "Jeedom Mini ou Raspberry 1, 2 ou zéro détecté, non supporté mais on essaye l'utilisation du paquet non-officiel v12.19.0 pour armv6l"
-    wget https://unofficial-builds.nodejs.org/download/release/v12.19.0/node-v12.19.0-linux-armv6l.tar.gz
-    tar -xvf node-v12.19.0-linux-armv6l.tar.gz
-    cd node-v12.19.0-linux-armv6l
+    echo "Jeedom Mini ou Raspberry 1, 2 ou zéro détecté, non supporté mais on essaye l'utilisation du paquet non-officiel ${armvVer} pour armv6l"
+    wget https://unofficial-builds.nodejs.org/download/release/${armvVer}/node-${armvVer}-linux-armv6l.tar.gz
+    tar -xvf node-${armvVer}-linux-armv6l.tar.gz
+    cd node-${armvVer}-linux-armv6l
     sudo cp -f -R * /usr/local/
     cd ..
-    rm -fR node-v12.19.0-linux-armv6l* &>/dev/null
+    rm -fR node-${armvVer}-linux-armv6l* &>/dev/null
     ln -s /usr/local/bin/node /usr/bin/node &>/dev/null
     ln -s /usr/local/bin/node /usr/bin/nodejs &>/dev/null
     #upgrade to recent npm
@@ -151,10 +152,10 @@ if [ $? -eq 0 ]; then
         if [[ "$rpi" == "1" ]]; then
           echo "Reset prefix (/usr) pour npm `sudo whoami`"
           sudo npm config set prefix /usr
-	      else
+	else
           echo "Reset prefix (/usr/local) pour npm `sudo whoami`"
           sudo npm config set prefix /usr/local
-	      fi
+	fi
       fi
     fi  
   else

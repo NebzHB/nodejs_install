@@ -158,9 +158,9 @@ fi
 
 silent type npm
 if [ $? -eq 0 ]; then
-  npmPrefix=`npm prefix -g`
-  npmPrefixSudo=`sudo npm prefix -g`
-  npmPrefixwwwData=`sudo -u www-data npm prefix -g`
+  npmPrefix=`npm --silent prefix -g`
+  npmPrefixSudo=`sudo npm --silent prefix -g`
+  npmPrefixwwwData=`sudo -u www-data npm --silent  prefix -g`
   echo -n "[Check Prefix : $npmPrefix and sudo prefix : $npmPrefixSudo and www-data prefix : $npmPrefixwwwData : "
   if [[ "$npmPrefixSudo" != "/usr" ]] && [[ "$npmPrefixSudo" != "/usr/local" ]]; then 
     echo "[  KO  ]"

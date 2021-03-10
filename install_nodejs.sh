@@ -42,8 +42,8 @@ Pin: origin deb.nodesource.com
 Pin-Priority: 600
 EOL
 
-step 15 "Mise à jour APT et installation des packages nécessaires"
-try sudo apt-get update
+step 15 "Installation des packages nécessaires"
+# apt-get update should have been done in the calling file
 try sudo DEBIAN_FRONTEND=noninteractive apt-get install -y lsb-release build-essential apt-utils git
 
 step 20 "Vérification du système"

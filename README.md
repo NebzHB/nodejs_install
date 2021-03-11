@@ -30,4 +30,11 @@ try sudo DEBIAN_FRONTEND=noninteractive apt-get install -y some_prerequired_pack
 . ${BASEDIR}/install_nodejs.sh ${installVer}
 
 step 60 "La suite"
+
+step 70 "suite"
+
+step 80 "suite encore"
+
+step 90 "nettoyage final
+post
 ```

@@ -1,9 +1,10 @@
-Require to be launch by a script containing :
+Require to be launched by a script containing :
 1. the inclusion lib
 2. the wget of this file
 3. the installVer as first parameter
 4. an apt-get update before launch
 5. pre-required packages already installed (nodejs required packages will be installed by this script)
+6. this script take care of percents from 10 to 50
 
 ```
 #!/bin/bash

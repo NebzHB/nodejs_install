@@ -5,7 +5,7 @@ Require to be launch by a script containing :
 4. an apt-get update before launch
 5. pre-required packages already installed (nodejs required packages will be installed by this script)
 
-
+```
 #!/bin/bash
 ######################### INCLUSION LIB ##########################
 BASEDIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
@@ -29,3 +29,4 @@ try sudo DEBIAN_FRONTEND=noninteractive apt-get install -y some_prerequired_pack
 . ${BASEDIR}/install_nodejs.sh ${installVer}
 
 step 60 "La suite"
+```

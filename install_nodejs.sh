@@ -78,8 +78,8 @@ fi
 step 25 "Vérification de la version de NodeJS installée"
 silent type nodejs
 if [ $? -eq 0 ]; then actual=`nodejs -v`; else actual='Aucune'; fi
-echo -n "[Check Version NodeJS actuelle : ${actual} : "
 testVer=$(php -r "echo version_compare('${actual}','v${minVer}','>=');")
+echo -n "[Check Version NodeJS actuelle : ${actual} : "
 if [[ $testVer == "1" ]]
 then
   echo "[  OK  ]";

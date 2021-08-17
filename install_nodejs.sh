@@ -76,8 +76,8 @@ then
 fi
 
 step 25 "Vérification de la version de NodeJS installée"
-silent type nodejs
-if [ $? -eq 0 ]; then actual=`nodejs -v`; else actual='Aucune'; fi
+silent type node
+if [ $? -eq 0 ]; then actual=`node -v`; else actual='Aucune'; fi
 testVer=$(php -r "echo version_compare('${actual}','v${minVer}','>=');")
 echo -n "[Check Version NodeJS actuelle : ${actual} : "
 if [[ $testVer == "1" ]]
@@ -138,7 +138,7 @@ else
   
   silent npm config set prefix ${npmPrefix}
 
-  new=`nodejs -v`;
+  new=`node -v`;
   echo -n "[Check Version NodeJS après install : ${new} : "
   testVerAfter=$(php -r "echo version_compare('${new}','v${minVer}','>=');")
   if [[ $testVerAfter != "1" ]]

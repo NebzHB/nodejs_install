@@ -105,7 +105,7 @@ else
     #version to install for armv6 (to check on https://unofficial-builds.nodejs.org)
     if [[ $installVer == "12" ]]
     then
-      armVer="12.21.0"
+      armVer="12.22.5"
     fi
     if [[ $installVer == "13" ]]
     then
@@ -113,11 +113,15 @@ else
     fi
     if [[ $installVer == "14" ]]
     then
-      armVer="14.16.0"
+      armVer="14.17.5"
     fi
     if [[ $installVer == "15" ]]
     then
-      armVer="15.9.0"
+      armVer="15.14.0"
+    fi
+    if [[ $installVer == "16" ]]
+    then
+      armVer="16.7.0"
     fi
     echo "Jeedom Mini ou Raspberry 1, 2 ou zéro détecté, non supporté mais on essaye l'utilisation du paquet non-officiel v${armVer} pour armv6l"
     try wget https://unofficial-builds.nodejs.org/download/release/v${armVer}/node-v${armVer}-linux-armv6l.tar.gz

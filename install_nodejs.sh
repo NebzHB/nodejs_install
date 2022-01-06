@@ -218,6 +218,7 @@ if [[ "$2" == "nvm" ]]; then
   step 46 "Installation NVM"
   wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | try bash
   silent rm -f install.sh
+  source ~/.bashrc
   try nvm alias default system
   if [ ! -z $3 ]; then
   	try nvm install $3

@@ -220,6 +220,7 @@ if [[ "$2" == "nvm" ]]; then
   silent rm -f install.sh
   source ~/.bashrc
   try nvm alias default system
+  try nvm use --delete-prefix system
   if [ ! -z $3 ]; then
   	try nvm install $3
 	try nvm use system

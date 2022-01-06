@@ -216,15 +216,16 @@ fi
 
 if [[ "$2" == "nvm" ]]; then
   step 46 "Installation NVM"
+  #rm -f ${HOME}/.npmrc
   wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
   rm -f install.sh
   source ~/.bashrc
   nvm alias default system
-  nvm use --delete-prefix system
+  nvm use system
   if [ ! -z $3 ]; then
   	nvm install $3
 	nvm alias default system
-	nvm use --delete-prefix system
+	nvm use system
   fi
 fi
 

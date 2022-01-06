@@ -223,7 +223,6 @@ if [[ "$2" == "nvm" ]]; then
   nvm use --delete-prefix system
   if [ ! -z $3 ]; then
   	nvm install $3
-	nvm use --delete-prefix v16.13.1
 	nvm alias default system
 	nvm use --delete-prefix system
   fi

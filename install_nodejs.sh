@@ -6,7 +6,7 @@ minVer=$1	#min NodeJS major version to be accepted
 step 10 "Prérequis"
 # vérifier si toujours nécessaire, cette source traine encore sur certaines smart et si une source est invalide -> nodejs ne s'installera pas
 
-if ls /etc/apt/sources.list.d/deb-multimedia.list* >/dev/null 2>&1; then
+if silent ls /etc/apt/sources.list.d/deb-multimedia.list*; then
   echo "Vérification si la source deb-multimedia existe (bug lors du apt-get update si c'est le cas)"
   echo "deb-multimedia existe !"
   if [ -f "/etc/apt/sources.list.d/deb-multimedia.list.disabledBy${PLUGIN}" ]; then
@@ -229,7 +229,7 @@ fi
 if [ "$toReAddRepo" -ne "0" ]; then
   echo "Réactivation de la source repo.jeedom.com qu'on avait désactivé !"
   toReAddRepo=0
-  sudo wget --quiet -O - http://repo.jeedom.com/odroid/conf/jeedom.gpg.key | sudo apt-key add -
+  sudo wget --quiet -O - http://repo.jeedom.com/odroid/conf/jeedom.gpg.key | silent sudo apt-key add -
   silent sudo apt-add-repository "deb http://repo.jeedom.com/odroid/ stable main"
 fi
 

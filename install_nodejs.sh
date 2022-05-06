@@ -9,14 +9,14 @@ step 10 "Prérequis"
 if [ -f "/etc/apt/sources.list.d/deb-multimedia.list"* ]; then
   echo "Vérification si la source deb-multimedia existe (bug lors du apt-get update si c'est le cas)"
   echo "deb-multimedia existe !"
-  if [ -f /etc/apt/sources.list.d/deb-multimedia.list.disabledBy${PLUGIN} ]; then
+  if [ -f "/etc/apt/sources.list.d/deb-multimedia.list.disabledBy${PLUGIN}" ]; then
     echo "mais on l'a déjà désactivé..."
   else
-    if [ -f /etc/apt/sources.list.d/deb-multimedia.list ]; then
+    if [ -f "/etc/apt/sources.list.d/deb-multimedia.list" ]; then
       echo "Désactivation de la source deb-multimedia !"
       silent sudo mv /etc/apt/sources.list.d/deb-multimedia.list /etc/apt/sources.list.d/deb-multimedia.list.disabledBy${PLUGIN}
     else
-      if [ -f /etc/apt/sources.list.d/deb-multimedia.list.disabled ]; then
+      if [ -f "/etc/apt/sources.list.d/deb-multimedia.list.disabled" ]; then
         echo "mais il est déjà désactivé..."
       else
         echo "mais n'est ni 'disabled' ou 'disabledBy${PLUGIN}'... il sera normalement ignoré donc ca devrait passer..."
@@ -27,7 +27,7 @@ fi
 
 # sur smart, je désactive le repo.jeedom car toujours un risque à l'heure actuel que nodejs s'install pas bien
 toReAddRepo=0
-if [ -f /media/boot/multiboot/meson64_odroidc2.dtb.linux ]; then
+if [ -f "/media/boot/multiboot/meson64_odroidc2.dtb.linux" ]; then
     hasRepo=$(grep "repo.jeedom.com" /etc/apt/sources.list | wc -l)
     if [ "$hasRepo" -ne "0" ]; then
       echo "Désactivation de la source repo.jeedom.com !"

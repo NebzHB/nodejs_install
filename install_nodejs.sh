@@ -5,7 +5,9 @@ minVer=$1	#min NodeJS major version to be accepted
 
 step 10 "Prérequis"
 # vérifier si toujours nécessaire, cette source traine encore sur certaines smart et si une source est invalide -> nodejs ne s'installera pas
+
 if [ -f /etc/apt/sources.list.d/deb-multimedia.list* ]; then
+
   echo "Vérification si la source deb-multimedia existe (bug lors du apt-get update si c'est le cas)"
   echo "deb-multimedia existe !"
   if [ -f /etc/apt/sources.list.d/deb-multimedia.list.disabledBy${PLUGIN} ]; then

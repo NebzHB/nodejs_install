@@ -159,7 +159,7 @@ echo -n "[Check Version NPM : ${npmver} : "
 echo $npmver | grep "8.11.0" &>/dev/null
 if [ $? -eq 0 ]; then
 	echo "[  KO  ] -> relancez les dépendances"
-	try exit 1
+	try (exit 1)
 else
 	echo "[  OK  ]"
 fi

@@ -239,7 +239,11 @@ fi
 if [ "$toReAddRepo" -ne "0" ]; then
   echo "Réactivation de la source repo.jeedom.com qu'on avait désactivé !"
   toReAddRepo=0
-  sudo wget --quiet -O - http://repo.jeedom.com/odroid/conf/jeedom.gpg.key | silent sudo apt-key add -
-  silent sudo apt-add-repository "deb http://repo.jeedom.com/odroid/ stable main"
+  sudo wget --timeout=15 --tries=1 --quiet -O - http://repo.jeedom.com/odroid/conf/jeedom.gpg.key | silent sudo apt-key add -
+  if [ $? -eq 0 ]; then
+    silent sudo apt-add-repository "deb http://repo.jeedom.com/odroid/ stable main"
+  else
+    echo "repo.jeedom.com ne réponds pas..."
+  fi
 fi
 

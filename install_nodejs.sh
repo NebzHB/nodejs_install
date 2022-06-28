@@ -26,12 +26,12 @@ if silent ls /etc/apt/sources.list.d/deb-multimedia.list*; then
 fi
 
 # sur smart, je désactive le repo.jeedom car toujours un risque à l'heure actuel que nodejs s'install pas bien
-toReAddRepo=0
+# toReAddRepo=0
 if [ -f "/media/boot/multiboot/meson64_odroidc2.dtb.linux" ]; then
     hasRepo=$(grep "repo.jeedom.com" /etc/apt/sources.list | wc -l)
     if [ "$hasRepo" -ne "0" ]; then
-      echo "Désactivation de la source repo.jeedom.com !"
-      toReAddRepo=1
+      echo "Désactivation de la source repo.jeedom.com qui n'existe plus !"
+#       toReAddRepo=1
       sudo apt-add-repository -r "deb http://repo.jeedom.com/odroid/ stable main"
     fi
 fi
@@ -236,14 +236,14 @@ if [ -f /etc/apt/sources.list.d/deb-multimedia.list.disabledBy${PLUGIN} ]; then
 fi
 
 # on remet le repo.jeedom si on l'a désactivé avant + refresh de la clé
-if [ "$toReAddRepo" -ne "0" ]; then
-  echo "Réactivation de la source repo.jeedom.com qu'on avait désactivé !"
-  toReAddRepo=0
-  sudo wget --timeout=15 --tries=1 --quiet -O - http://repo.jeedom.com/odroid/conf/jeedom.gpg.key | silent sudo apt-key add -
-  if [ $? -eq 0 ]; then
-    silent sudo apt-add-repository "deb http://repo.jeedom.com/odroid/ stable main"
-  else
-    echo "repo.jeedom.com ne réponds pas..."
-  fi
-fi
+# if [ "$toReAddRepo" -ne "0" ]; then
+#   echo "Réactivation de la source repo.jeedom.com qu'on avait désactivé !"
+#   toReAddRepo=0
+#   sudo wget --timeout=15 --tries=1 --quiet -O - http://repo.jeedom.com/odroid/conf/jeedom.gpg.key | silent sudo apt-key add -
+#   if [ $? -eq 0 ]; then
+#     silent sudo apt-add-repository "deb http://repo.jeedom.com/odroid/ stable main"
+#   else
+#     echo "repo.jeedom.com ne réponds pas..."
+#   fi
+# fi
 

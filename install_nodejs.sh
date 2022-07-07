@@ -165,7 +165,8 @@ npmver=`npm -v`;
 echo -n "[Check Version NPM : ${npmver} : "
 echo $npmver | grep "8.11.0" &>/dev/null
 if [ $? -eq 0 ]; then
-	echo "[  KO  ] -> Mise à jour"
+	echo "[  KO  ]"
+	step 42 "Mise à jour de NPM vers la 8.12.2"
 	try sudo npm install -g npm@8.12.2
 else
 	echo "[  OK  ]"

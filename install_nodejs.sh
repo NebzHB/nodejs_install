@@ -154,21 +154,21 @@ else
   fi
 fi
 
-npmver=`npm -v`;
-echo -n "[Check Version NPM : ${npmver} : "
-echo $npmver | grep "8.11.0" &>/dev/null
-if [ $? -eq 0 ]; then
-	echo "[  KO  ] -> relancez les dépendances"
-	try exit 1
-else
-	echo "[  OK  ]"
-fi
-
 silent type npm
 if [ $? -ne 0 ]; then
   step 40 "Installation de npm car non présent"
   try sudo DEBIAN_FRONTEND=noninteractive apt-get install -y npm  
   try sudo npm install -g npm
+fi
+
+npmver=`npm -v`;
+echo -n "[Check Version NPM : ${npmver} : "
+echo $npmver | grep "8.11.0" &>/dev/null
+if [ $? -eq 0 ]; then
+	echo "[  KO  ] -> Mise à jour"
+	try sudo npm install -g npm@8.12.2
+else
+	echo "[  OK  ]"
 fi
 
 silent type npm

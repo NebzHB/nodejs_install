@@ -38,3 +38,8 @@ step 80 "suite encore"
 step 90 "nettoyage final"
 post
 ```
+
+# Added error handlers :
+ npm `EINTEGRITY`
+ npm `npm ERR! fatal: could not create leading directories of '/root/.npm/_cacache/tmp/'`
+ npm `ENOTEMPTY` for homebridge-gsh, homebridge-alexa and homebridge-camera-ffmpeg

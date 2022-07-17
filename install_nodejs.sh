@@ -199,3 +199,20 @@ fi
 step 50 "Nettoyage"
 # on nettoie la priorité nodesource
 silent sudo rm -f /etc/apt/preferences.d/nodesource
+
+# ADDING ERROR HANDLERS
+# fix npm cache integrity issue
+add_fix_handler "EINTEGRITY" "" "sudo npm cache clean --force"
+
+# fix npm cache permissions
+add_fix_handler "npm ERR! fatal: could not create leading directories of '/root/.npm/_cacache/tmp/" "*code 128" "sudo chown -R root:root /root/.npm"
+
+# check for ENOTEMPTY error in both /usr and /usr/local
+add_fix_handler "npm ERR! dest /usr/local/lib/node_modules/.homebridge-config-ui-x-" "*ENOTEMPTY" "sudo rm -fR /usr/local/lib/node_modules/.homebridge-config-ui-x-*"
+add_fix_handler "npm ERR! dest /usr/lib/node_modules/.homebridge-config-ui-x-" "*ENOTEMPTY" "sudo rm -fR /usr/lib/node_modules/.homebridge-config-ui-x-*"
+
+add_fix_handler "npm ERR! dest /usr/local/lib/node_modules/.homebridge-alexa-" "*ENOTEMPTY" "sudo rm -fR /usr/local/lib/node_modules/.homebridge-alexa-*"
+add_fix_handler "npm ERR! dest /usr/lib/node_modules/.homebridge-alexa-" "*ENOTEMPTY" "sudo rm -fR /usr/lib/node_modules/.homebridge-alexa-*"
+
+add_fix_handler "npm ERR! dest /usr/local/lib/node_modules/.homebridge-gsh-" "*ENOTEMPTY" "sudo rm -fR /usr/local/lib/node_modules/.homebridge-gsh-*"
+add_fix_handler "npm ERR! dest /usr/lib/node_modules/.homebridge-gsh-" "*ENOTEMPTY" "sudo rm -fR /usr/lib/node_modules/.homebridge-gsh-*"

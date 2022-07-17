@@ -6,36 +6,6 @@ minVer=$1	#min NodeJS major version to be accepted
 step 10 "Prérequis"
 # vérifier si toujours nécessaire, cette source traine encore sur certaines smart et si une source est invalide -> nodejs ne s'installera pas
 
-if silent ls /etc/apt/sources.list.d/deb-multimedia.list*; then
-  echo "Vérification si la source deb-multimedia existe (bug lors du apt-get update si c'est le cas)"
-  echo "deb-multimedia existe !"
-  if [ -f "/etc/apt/sources.list.d/deb-multimedia.list.disabledBy${PLUGIN}" ]; then
-    echo "mais on l'a déjà désactivé..."
-  else
-    if [ -f "/etc/apt/sources.list.d/deb-multimedia.list" ]; then
-      echo "Désactivation de la source deb-multimedia !"
-      silent sudo mv /etc/apt/sources.list.d/deb-multimedia.list /etc/apt/sources.list.d/deb-multimedia.list.disabledBy${PLUGIN}
-    else
-      if [ -f "/etc/apt/sources.list.d/deb-multimedia.list.disabled" ]; then
-        echo "mais il est déjà désactivé..."
-      else
-        echo "mais n'est ni 'disabled' ou 'disabledBy${PLUGIN}'... il sera normalement ignoré donc ca devrait passer..."
-      fi
-    fi
-  fi
-fi
-
-# sur smart, je désactive le repo.jeedom car toujours un risque à l'heure actuel que nodejs s'install pas bien
-# toReAddRepo=0
-if [ -f "/media/boot/multiboot/meson64_odroidc2.dtb.linux" ]; then
-    hasRepo=$(grep "repo.jeedom.com" /etc/apt/sources.list | wc -l)
-    if [ "$hasRepo" -ne "0" ]; then
-      echo "Désactivation de la source repo.jeedom.com qui n'existe plus !"
-#       toReAddRepo=1
-      sudo apt-add-repository -r "deb http://repo.jeedom.com/odroid/ stable main"
-    fi
-fi
-
 #prioritize nodesource nodejs : just in case
 sudo bash -c "cat >> /etc/apt/preferences.d/nodesource" << EOL
 Package: nodejs
@@ -229,22 +199,3 @@ fi
 step 50 "Nettoyage"
 # on nettoie la priorité nodesource
 silent sudo rm -f /etc/apt/preferences.d/nodesource
-
-# on remet deb-multimedia si on l'a désactivé avant
-if [ -f /etc/apt/sources.list.d/deb-multimedia.list.disabledBy${PLUGIN} ]; then
-  echo "Réactivation de la source deb-multimedia qu'on avait désactivé !"
-  silent sudo mv /etc/apt/sources.list.d/deb-multimedia.list.disabledBy${PLUGIN} /etc/apt/sources.list.d/deb-multimedia.list
-fi
-
-# on remet le repo.jeedom si on l'a désactivé avant + refresh de la clé
-# if [ "$toReAddRepo" -ne "0" ]; then
-#   echo "Réactivation de la source repo.jeedom.com qu'on avait désactivé !"
-#   toReAddRepo=0
-#   sudo wget --timeout=15 --tries=1 --quiet -O - http://repo.jeedom.com/odroid/conf/jeedom.gpg.key | silent sudo apt-key add -
-#   if [ $? -eq 0 ]; then
-#     silent sudo apt-add-repository "deb http://repo.jeedom.com/odroid/ stable main"
-#   else
-#     echo "repo.jeedom.com ne réponds pas..."
-#   fi
-# fi
-

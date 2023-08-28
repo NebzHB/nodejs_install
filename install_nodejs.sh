@@ -108,15 +108,15 @@ else
   if [[ $arch == "armv6l" ]]; then
     #version to install for armv6 (to check on https://unofficial-builds.nodejs.org)
     if [[ $installVer == "12" ]]; then
-      armVer="12.22.12"
-    elif [[ $installVer == "13" ]]; then
-      armVer="13.14.0"
+      armVer="12.22.9"
     elif [[ $installVer == "14" ]]; then
-      armVer="14.19.2"
-    elif [[ $installVer == "15" ]]; then
-      armVer="15.14.0"
+      armVer="14.21.3"
     elif [[ $installVer == "16" ]]; then
-      armVer="16.15.0"
+      armVer="16.20.2"
+    elif [[ $installVer == "18" ]]; then
+      armVer="18.17.1"
+    elif [[ $installVer == "20" ]]; then
+      armVer="20.5.1"
     fi
     if [ "$LANG_DEP" = "fr" ]; then
     	echo "Jeedom Mini ou Raspberry 1, 2 ou zéro détecté, non supporté mais on essaye l'utilisation du paquet non-officiel v${armVer} pour armv6l"

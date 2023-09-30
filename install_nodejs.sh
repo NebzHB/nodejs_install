@@ -106,7 +106,7 @@ else
   
   
   if [[ $arch == "armv6l" ]]; then
-    #version to install for armv6 (to check on https://unofficial-builds.nodejs.org)
+    #version to install for armv6 (to check on https://unofficial-builds.nodejs.org/download/release/)
     if [[ $installVer == "12" ]]; then
       armVer="12.22.12"
     elif [[ $installVer == "14" ]]; then

@@ -213,7 +213,7 @@ if [ $? -eq 0 ]; then
 	echo "[  KO  ]"
 	forceUpdateNPM=1
 else
-	if [ $forceUpdateNPM -eq 1 ]; then
+	if [[ $forceUpdateNPM == "1" ]]; then
 		if [ "$LANG_DEP" = "fr" ]; then
 			echo "[ MàJ demandée ]"
 		else
@@ -224,13 +224,13 @@ else
 	fi
 fi
 
-if [ $forceUpdateNPM -eq 1 ]; then
-  if [ "$LANG_DEP" = "fr" ]; then
-  	step 37 "Mise à jour de npm"
-  else
-  	step 37 "Updating npm"
-  fi
-  try sudo npm install -g npm
+if [[ $forceUpdateNPM == "1" ]]; then
+	if [ "$LANG_DEP" = "fr" ]; then
+		step 37 "Mise à jour de npm"
+	else
+		step 37 "Updating npm"
+	fi
+	try sudo npm install -g npm
 fi
 
 silent type npm

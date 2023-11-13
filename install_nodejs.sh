@@ -152,7 +152,7 @@ else
     silent ln -s /usr/local/bin/node /usr/bin/node
     silent ln -s /usr/local/bin/node /usr/bin/nodejs
     #upgrade to recent npm
-    try sudo npm install -g npm
+    forceUpdateNPM=1
   else
     if [ "$LANG_DEP" = "fr" ]; then
     	echo "Utilisation du dépot officiel"
@@ -198,12 +198,12 @@ fi
 silent type npm
 if [ $? -ne 0 ]; then
   if [ "$LANG_DEP" = "fr" ]; then
-  	step 40 "Installation de npm car non présent"
+  	step 35 "Installation de npm car non présent"
   else
-  	step 40 "Installing npm because not present"
+  	step 35 "Installing npm because not present"
   fi
   try sudo DEBIAN_FRONTEND=noninteractive apt-get install -y npm  
-  try sudo npm install -g npm
+  forceUpdateNPM=1
 fi
 
 npmver=`npm -v`;
@@ -211,14 +211,26 @@ echo -n "[Check Version NPM : ${npmver} : "
 echo $npmver | grep "8.11.0" &>/dev/null
 if [ $? -eq 0 ]; then
 	echo "[  KO  ]"
-	if [ "$LANG_DEP" = "fr" ]; then
-		step 42 "Mise à jour de NPM vers la 8.12.2"
-	else
-		step 42 "Updating NPM to version 8.12.2"
-	fi
-	try sudo npm install -g npm@8.12.2
+	forceUpdateNPM=1
 else
+  if[ $forceUpdateNPM -eq 1 ]; then
+	if [ "$LANG_DEP" = "fr" ]; then
+		echo "[ MàJ demandée ]"
+  	else
+		echo "[ Update requested ]"
+  	fi
+  else
 	echo "[  OK  ]"
+  fi
+fi
+
+if [ $forceUpdateNPM -eq 1 ]; then
+  if [ "$LANG_DEP" = "fr" ]; then
+  	step 37 "Mise à jour de npm"
+  else
+  	step 37 "Updating npm"
+  fi
+  try sudo npm install -g npm
 fi
 
 silent type npm
@@ -235,33 +247,33 @@ if [ $? -eq 0 ]; then
     echo "[  KO  ]"
     if [[ "$npmPrefixwwwData" == "/usr" ]] || [[ "$npmPrefixwwwData" == "/usr/local" ]]; then
       if [ "$LANG_DEP" = "fr" ]; then
-      	step 45 "Réinitialisation prefixe ($npmPrefixwwwData) pour npm `sudo whoami`"
+      		step 40 "Réinitialisation prefixe ($npmPrefixwwwData) pour npm `sudo whoami`"
       else
-        step 45 "Prefix reset ($npmPrefixwwwData) for npm `sudo whoami`"
+        	step 40 "Prefix reset ($npmPrefixwwwData) for npm `sudo whoami`"
       fi
       sudo npm config set prefix $npmPrefixwwwData
     else
       if [[ "$npmPrefix" == "/usr" ]] || [[ "$npmPrefix" == "/usr/local" ]]; then
         if [ "$LANG_DEP" = "fr" ]; then
-        	step 45 "Réinitialisation prefixe ($npmPrefix) pour npm `sudo whoami`"
+        	step 40 "Réinitialisation prefixe ($npmPrefix) pour npm `sudo whoami`"
 	else
-		step 45 "Prefix reset ($npmPrefix) for npm `sudo whoami`"
+		step 40 "Prefix reset ($npmPrefix) for npm `sudo whoami`"
 	fi
         sudo npm config set prefix $npmPrefix
       else
         [ -f /usr/bin/raspi-config ] && { rpi="1"; } || { rpi="0"; }
         if [[ "$rpi" == "1" ]]; then
 	  if [ "$LANG_DEP" = "fr" ]; then
-	  	step 45 "Réinitialisation prefixe (/usr) pour npm `sudo whoami`"
+	  	step 40 "Réinitialisation prefixe (/usr) pour npm `sudo whoami`"
 	  else
-	  	step 45 "Prefix reset (/usr) for npm `sudo whoami`"
+	  	step 40 "Prefix reset (/usr) for npm `sudo whoami`"
 	  fi
           sudo npm config set prefix /usr
 	else
 	  if [ "$LANG_DEP" = "fr" ]; then
-	  	step 45 "Réinitialisation prefixe (/usr/local) pour npm `sudo whoami`"
+	  	step 40 "Réinitialisation prefixe (/usr/local) pour npm `sudo whoami`"
 	  else
-          	step 45 "Prefix reset (/usr/local) for npm `sudo whoami`"
+          	step 40 "Prefix reset (/usr/local) for npm `sudo whoami`"
 	  fi
           sudo npm config set prefix /usr/local
 	fi
@@ -274,9 +286,9 @@ if [ $? -eq 0 ]; then
       else
         echo "[  KO  ]"
 	if [ "$LANG_DEP" = "fr" ]; then
-        	step 45 "Réinitialisation prefixe ($npmPrefixwwwData) pour npm `sudo whoami`"
+        	step 40 "Réinitialisation prefixe ($npmPrefixwwwData) pour npm `sudo whoami`"
 	else
-		step 45 "Prefix reset ($npmPrefixwwwData) for npm `sudo whoami`"
+		step 40 "Prefix reset ($npmPrefixwwwData) for npm `sudo whoami`"
 	fi
         sudo npm config set prefix $npmPrefixwwwData
       fi
@@ -284,25 +296,25 @@ if [ $? -eq 0 ]; then
       echo "[  KO  ]"
       if [[ "$npmPrefix" == "/usr" ]] || [[ "$npmPrefix" == "/usr/local" ]]; then
         if [ "$LANG_DEP" = "fr" ]; then
-        	step 45 "Réinitialisation prefixe ($npmPrefix) pour npm `sudo whoami`"
+        	step 40 "Réinitialisation prefixe ($npmPrefix) pour npm `sudo whoami`"
 	else
-		step 45 "Prefix reset ($npmPrefix) for npm `sudo whoami`"
+		step 40 "Prefix reset ($npmPrefix) for npm `sudo whoami`"
 	fi
         sudo npm config set prefix $npmPrefix
       else
         [ -f /usr/bin/raspi-config ] && { rpi="1"; } || { rpi="0"; }
         if [[ "$rpi" == "1" ]]; then
 	  if [ "$LANG_DEP" = "fr" ]; then
-	  	step 45 "Réinitialisation prefixe (/usr) pour npm `sudo whoami`"
+	  	step 40 "Réinitialisation prefixe (/usr) pour npm `sudo whoami`"
 	  else
-	  	step 45 "Prefix reset (/usr) for npm `sudo whoami`"
+	  	step 40 "Prefix reset (/usr) for npm `sudo whoami`"
 	  fi
           sudo npm config set prefix /usr
 	else
 	  if [ "$LANG_DEP" = "fr" ]; then
-          	step 45 "Réinitialisation prefixe (/usr/local) pour npm `sudo whoami`"
+          	step 40 "Réinitialisation prefixe (/usr/local) pour npm `sudo whoami`"
 	  else
-		step 45 "Prefix reset (/usr/local) for npm `sudo whoami`"
+		step 40 "Prefix reset (/usr/local) for npm `sudo whoami`"
 	  fi
           sudo npm config set prefix /usr/local
 	fi

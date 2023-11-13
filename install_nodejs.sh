@@ -213,15 +213,15 @@ if [ $? -eq 0 ]; then
 	echo "[  KO  ]"
 	forceUpdateNPM=1
 else
-  if [ $forceUpdateNPM -eq 1 ]; then
-	if [ "$LANG_DEP" = "fr" ]; then
-		echo "[ MàJ demandée ]"
-  	else
-		echo "[ Update requested ]"
-  	fi
-  else
-	echo "[  OK  ]"
-  fi
+	if [ $forceUpdateNPM -eq 1 ]; then
+		if [ "$LANG_DEP" = "fr" ]; then
+			echo "[ MàJ demandée ]"
+		else
+			echo "[ Update requested ]"
+		fi
+	else
+		echo "[  OK  ]"
+	fi
 fi
 
 if [ $forceUpdateNPM -eq 1 ]; then

@@ -27,6 +27,7 @@ try sudo apt-get update
 try sudo DEBIAN_FRONTEND=noninteractive apt-get install -y exemple_package_needed_after_step_50
 
 #install nodejs, steps 10->50
+forceUpdateNPM=1 #sinon garde la version installée par nodeSource
 . ${BASEDIR}/install_nodejs.sh ${installVer}
 
 step 60 "La suite"

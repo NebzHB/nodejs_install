@@ -39,17 +39,17 @@ if [ $? -eq 0 ]; then
   if [[ "$today" > "20200630" ]]; then
     if [ "$LANG_DEP" = "fr" ]; then
       echo "$HR"
-      [ "$COLOR" = "true" ] && echo -n "<span class='label label-xs label-danger'>"
+      [[ $COLOR -eq 1 ]] && echo -n "<span class='label label-xs label-danger'>"
       echo -n "== KO == Erreur d'Installation"
-      [ "$COLOR" = "true" ] && echo -n "</span>"
+      [[ $COLOR -eq 1 ]] && echo -n "</span>"
       echo
       echo "$HR"
       echo "== ATTENTION Debian 8 Jessie n'est officiellement plus supportée depuis le 30 juin 2020, merci de mettre à jour votre distribution !!!"
     else
       echo "$HR"
-      [ "$COLOR" = "true" ] && echo -n "<span class='label label-xs label-danger'>"
+      [[ $COLOR -eq 1 ]] && echo -n "<span class='label label-xs label-danger'>"
       echo -n "== KO == Installation Error"
-      [ "$COLOR" = "true" ] && echo -n "</span>"
+      [[ $COLOR -eq 1 ]] && echo -n "</span>"
       echo
       echo "$HR"
       echo "== WARNING Debian 8 Jessie is not supported anymore since the 30rd of june 2020, thank you to update your distribution !!!"
@@ -65,17 +65,17 @@ if [ $? -eq 0 ]; then
   if [[ "$today" > "20220630" ]]; then
     if [ "$LANG_DEP" = "fr" ]; then
       echo "$HR"
-      [ "$COLOR" = "true" ] && echo -n "<span class='label label-xs label-danger'>"
+      [[ $COLOR -eq 1 ]] && echo -n "<span class='label label-xs label-danger'>"
       echo -n "== KO == Erreur d'Installation"
-      [ "$COLOR" = "true" ] && echo -n "</span>"
+      [[ $COLOR -eq 1 ]] && echo -n "</span>"
       echo
       echo "$HR"
       echo "== ATTENTION Debian 9 Stretch n'est officiellement plus supportée depuis le 30 juin 2022, merci de mettre à jour votre distribution !!!"
     else
       echo "$HR"
-      [ "$COLOR" = "true" ] && echo -n "<span class='label label-xs label-danger'>"
+      [[ $COLOR -eq 1 ]] && echo -n "<span class='label label-xs label-danger'>"
       echo -n "== KO == Installation Error"
-      [ "$COLOR" = "true" ] && echo -n "</span>"
+      [[ $COLOR -eq 1 ]] && echo -n "</span>"
       echo
       echo "$HR"
       echo "== WARNING Debian 9 Stretch is not supported anymore since the 30rd of june 2022, thank you to update your distribution !!!"
@@ -89,17 +89,17 @@ bits=$(getconf LONG_BIT)
 if { [ "$arch" = "i386" ] || [ "$arch" = "i686" ]; } && [ "$bits" -eq "32" ]; then
   if [ "$LANG_DEP" = "fr" ]; then
     echo "$HR"
-    [ "$COLOR" = "true" ] && echo -n "<span class='label label-xs label-danger'>"
+    [[ $COLOR -eq 1 ]] && echo -n "<span class='label label-xs label-danger'>"
     echo -n "== KO == Erreur d'Installation"
-    [ "$COLOR" = "true" ] && echo -n "</span>"
+    [[ $COLOR -eq 1 ]] && echo -n "</span>"
     echo
     echo "$HR"
     echo "== ATTENTION Votre système est x86 en 32bits et NodeJS 12 n'y est pas supporté, merci de passer en 64bits !!!"
   else
     echo "$HR"
-    [ "$COLOR" = "true" ] && echo -n "<span class='label label-xs label-danger'>"
+    [[ $COLOR -eq 1 ]] && echo -n "<span class='label label-xs label-danger'>"
     echo -n "== KO == Installation Error"
-    [ "$COLOR" = "true" ] && echo -n "</span>"
+    [[ $COLOR -eq 1 ]] && echo -n "</span>"
     echo
     echo "$HR"
     echo "== WARNING Your system is x86 in 32bits and NodeJS 12 doesn not support it anymore, thank you to reinstall in 64bits !!!"
@@ -203,13 +203,13 @@ else
   fi
   testVerAfter=$(php -r "echo version_compare('${new}','v${minVer}','>=');")
   if [[ $testVerAfter != "1" ]]; then
-    [ "$COLOR" = "true" ] && echo -n "<span class='label label-xs label-danger'>"
+    [[ $COLOR -eq 1 ]] && echo -n "<span class='label label-xs label-danger'>"
     if [ "$LANG_DEP" = "fr" ]; then
     	echo -n "[  KO  ] -> relancez les dépendances"
     else
     	echo -n "[  KO  ] -> restart the dependancies"
     fi
-    [ "$COLOR" = "true" ] && echo -n "</span>"
+    [[ $COLOR -eq 1 ]] && echo -n "</span>"
     echo
   else
     echo_success

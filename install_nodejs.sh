@@ -183,7 +183,7 @@ else
     #try sudo DEBIAN_FRONTEND=noninteractive apt-get install -y nodejs
     
     #new method
-    NODE_MAJOR=$installVer
+    NODE_MAJOR=$( [[ $installVer == *.* ]] && echo $installVer | cut -d'.' -f1 || echo $installVer )
     sudo mkdir -p /etc/apt/keyrings
     silent sudo rm /etc/apt/keyrings/nodesource.gpg
     curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg

@@ -192,9 +192,9 @@ else
   testVerAfter=$(php -r "echo version_compare('${new}','v${minVer}','>=');")
   if [[ $testVerAfter != "1" ]]; then
     if [ "$LANG_DEP" = "fr" ]; then
-    	echo -n "[  KO  ] -> relancez les dépendances"
+    	echo -n "[ERROR] -> relancez les dépendances"
     else
-    	echo -n "[  KO  ] -> restart the dependancies"
+    	echo -n "[ERROR] -> restart the dependancies"
     fi
     echo
   else

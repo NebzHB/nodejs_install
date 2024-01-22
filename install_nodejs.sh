@@ -142,9 +142,9 @@ else
     elif [[ $NODE_MAJOR == "16" ]]; then
       armVer="16.20.2"
     elif [[ $NODE_MAJOR == "18" ]]; then
-      armVer="18.18.0"
+      armVer="18.19.0"
     elif [[ $NODE_MAJOR == "20" ]]; then
-      armVer="20.8.0"
+      armVer="20.11.0"
     fi
     if [ "$LANG_DEP" = "fr" ]; then
     	echo "Jeedom Mini ou Raspberry 1, 2 ou zéro détecté, non supporté mais on essaye l'utilisation du paquet non-officiel v${armVer} pour armv6l"

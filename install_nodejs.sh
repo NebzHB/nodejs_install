@@ -113,10 +113,11 @@ if [[ $testVer == "1" ]]; then
   echo_success
   new=$actual
 else
-  echo_failure
   if [ "$LANG_DEP" = "fr" ]; then
+  	echo "Correction..."
   	step 30 "Installation de NodeJS $NODE_MAJOR"
   else
+  	echo "Fixing..."
   	step 30 "Installing NodeJS $NODE_MAJOR"
   fi
   

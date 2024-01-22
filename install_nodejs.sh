@@ -115,9 +115,9 @@ if [[ $testVer == "1" ]]; then
 else
   echo_failure
   if [ "$LANG_DEP" = "fr" ]; then
-  	step 30 "Installation de NodeJS $installVer"
+  	step 30 "Installation de NodeJS $NODE_MAJOR"
   else
-  	step 30 "Installing NodeJS $installVer"
+  	step 30 "Installing NodeJS $NODE_MAJOR"
   fi
   
   #if npm exists
@@ -134,15 +134,15 @@ else
   
   if [[ $arch == "armv6l" ]]; then
     #version to install for armv6 (to check on https://unofficial-builds.nodejs.org/download/release/)
-    if [[ $installVer == "12" ]]; then
+    if [[ $NODE_MAJOR == "12" ]]; then
       armVer="12.22.12"
-    elif [[ $installVer == "14" ]]; then
+    elif [[ $NODE_MAJOR == "14" ]]; then
       armVer="14.21.3"
-    elif [[ $installVer == "16" ]]; then
+    elif [[ $NODE_MAJOR == "16" ]]; then
       armVer="16.20.2"
-    elif [[ $installVer == "18" ]]; then
+    elif [[ $NODE_MAJOR == "18" ]]; then
       armVer="18.18.0"
-    elif [[ $installVer == "20" ]]; then
+    elif [[ $NODE_MAJOR == "20" ]]; then
       armVer="20.8.0"
     fi
     if [ "$LANG_DEP" = "fr" ]; then

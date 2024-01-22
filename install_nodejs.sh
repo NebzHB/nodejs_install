@@ -2,6 +2,7 @@
 
 installVer=$1 	#NodeJS major version to be installed
 minVer=$1	#min NodeJS major version to be accepted
+NODE_MAJOR=$( [[ $installVer == *.* ]] && echo $installVer | cut -d'.' -f1 || echo $installVer )
 
 if [ "$LANG_DEP" = "fr" ]; then
 	step 10 "Prérequis"
@@ -171,7 +172,6 @@ else
     #try sudo DEBIAN_FRONTEND=noninteractive apt-get install -y nodejs
     
     #new method
-    NODE_MAJOR=$( [[ $installVer == *.* ]] && echo $installVer | cut -d'.' -f1 || echo $installVer )
     sudo mkdir -p /etc/apt/keyrings
     silent sudo rm /etc/apt/keyrings/nodesource.gpg
     curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg

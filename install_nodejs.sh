@@ -24,7 +24,7 @@ else
 	step 15 "Mandatory packages installation"
 fi
 # apt-get update should have been done in the calling file
-try sudo DEBIAN_FRONTEND=noninteractive apt-get install -y lsb-release build-essential apt-utils git gnupg
+try sudo DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::ForceIPv4=true install -y lsb-release build-essential apt-utils git gnupg
 
 if [ "$LANG_DEP" = "fr" ]; then
 	step 20 "Vérification du système"
@@ -151,7 +151,7 @@ else
     else
     	echo "Jeedom Mini or Raspberry 1, 2 or zero detected, unsupported but we try to install unofficial packet v${armVer} for armv6l"
     fi
-    try wget https://unofficial-builds.nodejs.org/download/release/v${armVer}/node-v${armVer}-linux-armv6l.tar.gz
+    try wget -4 https://unofficial-builds.nodejs.org/download/release/v${armVer}/node-v${armVer}-linux-armv6l.tar.gz
     try tar -xvf node-v${armVer}-linux-armv6l.tar.gz
     cd node-v${armVer}-linux-armv6l
     try sudo cp -f -R * /usr/local/
@@ -178,8 +178,8 @@ else
     curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
     silent sudo rm /etc/apt/sources.list.d/nodesource.list
     echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" | silent sudo tee /etc/apt/sources.list.d/nodesource.list
-    try sudo apt-get update
-    try sudo DEBIAN_FRONTEND=noninteractive apt-get install -y nodejs
+    try sudo apt-get -o Acquire::ForceIPv4=true update
+    try sudo DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::ForceIPv4=true install -y nodejs
   fi
   
   silent npm config set prefix ${npmPrefix}
@@ -210,7 +210,7 @@ if [ $? -ne 0 ]; then
   else
   	step 35 "Installing npm because not present"
   fi
-  try sudo DEBIAN_FRONTEND=noninteractive apt-get install -y npm  
+  try sudo DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::ForceIPv4=true install -y npm  
   forceUpdateNPM=1
 fi
 

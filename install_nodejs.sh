@@ -240,7 +240,7 @@ if [[ $forceUpdateNPM == "1" ]]; then
 	else
 		step 37 "Updating npm"
 	fi
-	try sudo npm install -g npm
+	try sudo -E npm install -g npm
 fi
 
 silent type npm

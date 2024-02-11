@@ -9,7 +9,9 @@ if [ "$LANG_DEP" = "fr" ]; then
 else
 	step 10 "Prerequisites"
 fi
-# vérifier si toujours nécessaire, cette source traine encore sur certaines smart et si une source est invalide -> nodejs ne s'installera pas
+
+#ipv4 first for dns (like before nodejs 18)
+export NODE_OPTIONS="--dns-result-order=ipv4first"
 
 #prioritize nodesource nodejs : just in case
 sudo bash -c "cat >> /etc/apt/preferences.d/nodesource" << EOL

@@ -144,9 +144,24 @@ else
     elif [[ $NODE_MAJOR == "16" ]]; then
       armVer="16.20.2"
     elif [[ $NODE_MAJOR == "18" ]]; then
-      armVer="18.19.0"
+      armVer="18.20.8"
     elif [[ $NODE_MAJOR == "20" ]]; then
-      armVer="20.11.0"
+      armVer="20.19.1"
+    elif [[ $NODE_MAJOR == "22" ]]; then
+      if [ "$LANG_DEP" = "fr" ]; then
+	echo "$HR"
+	echo -n "== KO == Erreur d'Installation"
+	echo
+	echo "$HR"
+	echo "== ATTENTION Impossible d'installer NodeJS 22 sur Jeedom Mini ou Raspberry 1, 2 ou zéro, merci de mettre à jour votre matériel !!!"
+      else
+	echo "$HR"
+	echo -n "== KO == Installation Error"
+	echo
+	echo "$HR"
+	echo "== WARNING Cannot install NodeJS 22 on Jeedom Mini or Raspberry 1, 2 or zero, thank you to upgrade your hardware !!!"
+      fi
+      exit 1
     fi
     if [ "$LANG_DEP" = "fr" ]; then
     	echo "Jeedom Mini ou Raspberry 1, 2 ou zéro détecté, non supporté mais on essaye l'utilisation du paquet non-officiel v${armVer} pour armv6l"

@@ -3,6 +3,7 @@
 installVer=$1 	#NodeJS major version to be installed
 minVer=$1	#min NodeJS major version to be accepted
 NODE_MAJOR=$( [[ $installVer == *.* ]] && echo $installVer | cut -d'.' -f1 || echo $installVer )
+today=$(date +%Y%m%d)
 
 if [ "$LANG_DEP" = "fr" ]; then
 	step 10 "Prérequis"
@@ -33,12 +34,11 @@ if [ "$LANG_DEP" = "fr" ]; then
 else
 	step 20 "System Check"
 fi
-arch=`arch`;
+arch=$(arch);
 
 #jessie as libstdc++ > 4.9 needed for nodejs 12+
 lsb_release -c | grep jessie
 if [ $? -eq 0 ]; then
-  today=$(date +%Y%m%d)
   if [[ "$today" > "20200630" ]]; then
     if [ "$LANG_DEP" = "fr" ]; then
       echo "$HR"
@@ -51,7 +51,7 @@ if [ $? -eq 0 ]; then
       echo -n "== KO == Installation Error"
       echo
       echo "$HR"
-      echo "== WARNING Debian 8 Jessie is not supported anymore since the 30rd of june 2020, thank you to update your distribution !!!"
+      echo "== WARNING Debian 8 Jessie is not supported anymore since the 30th of june 2020, thank you to update your distribution !!!"
     fi
     exit 1
   fi
@@ -60,7 +60,6 @@ fi
 #stretch doesn't support nodejs 18+
 lsb_release -c | grep stretch
 if [ $? -eq 0 ]; then
-  today=$(date +%Y%m%d)
   if [[ "$today" > "20220630" ]]; then
     if [ "$LANG_DEP" = "fr" ]; then
       echo "$HR"
@@ -73,7 +72,7 @@ if [ $? -eq 0 ]; then
       echo -n "== KO == Installation Error"
       echo
       echo "$HR"
-      echo "== WARNING Debian 9 Stretch is not supported anymore since the 30rd of june 2022, thank you to update your distribution !!!"
+      echo "== WARNING Debian 9 Stretch is not supported anymore since the 30th of june 2022, thank you to update your distribution !!!"
     fi
     exit 1
   fi
@@ -93,7 +92,7 @@ if { [ "$arch" = "i386" ] || [ "$arch" = "i686" ]; } && [ "$bits" -eq "32" ]; th
     echo -n "== KO == Installation Error"
     echo
     echo "$HR"
-    echo "== WARNING Your system is x86 in 32bits and NodeJS 12 doesn not support it anymore, thank you to reinstall in 64bits !!!"
+    echo "== WARNING Your system is x86 in 32bits and NodeJS 12 does not support it anymore, thank you to reinstall in 64bits !!!"
   fi
   exit 1 
 fi
@@ -104,8 +103,14 @@ else
 	step 25 "Installed NodeJS version check"
 fi
 silent type node
-if [ $? -eq 0 ]; then actual=`node -v`; else actual='Aucune'; fi
-testVer=$(php -r "echo version_compare('${actual}','v${minVer}','>=');")
+if [ $? -eq 0 ]; then 
+	actual=$(node -v)
+ 	testVer=$(php -r "echo version_compare('${actual}','v${minVer}','>=');")
+else 
+	actual='Aucune'
+ 	testVer=0
+fi
+
 if [ "$LANG_DEP" = "fr" ]; then
 	echo -n "[Check Version NodeJS actuelle : ${actual} : "
 else
